@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Context" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ArticleId" />
+    </Key>
+    <Property Name="ArticleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilePath" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Creator" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Article__Creator__38996AB5" FromRole="Article" ToRole="User" />
+    <NavigationProperty Name="HashTags" Relationship="Self.ArticleHashTag" FromRole="Article" ToRole="HashTag" />
+    <NavigationProperty Name="UsersWhoAdedToFavorite" Relationship="Self.ArticleUserFavorite" FromRole="Article" ToRole="User" />
+    <NavigationProperty Name="UsersWhoLiked" Relationship="Self.ArticleUserLike" FromRole="Article" ToRole="User" />
+    <NavigationProperty Name="UsersWhoViewed" Relationship="Self.ArticleUserView" FromRole="Article" ToRole="User" />
+  </EntityType>
+  <EntityType Name="HashTag">
+    <Key>
+      <PropertyRef Name="HashTagId" />
+    </Key>
+    <Property Name="HashTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tag" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Articles" Relationship="Self.ArticleHashTag" FromRole="HashTag" ToRole="Article" />
+    <NavigationProperty Name="Users" Relationship="Self.UserHashTag" FromRole="HashTag" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MyArticles" Relationship="Self.FK__Article__Creator__38996AB5" FromRole="User" ToRole="Article" />
+    <NavigationProperty Name="FavoriteArticles" Relationship="Self.ArticleUserFavorite" FromRole="User" ToRole="Article" />
+    <NavigationProperty Name="LikedArticles" Relationship="Self.ArticleUserLike" FromRole="User" ToRole="Article" />
+    <NavigationProperty Name="ViewedArticles" Relationship="Self.ArticleUserView" FromRole="User" ToRole="Article" />
+    <NavigationProperty Name="HashTags" Relationship="Self.UserHashTag" FromRole="User" ToRole="HashTag" />
+  </EntityType>
+  <Association Name="FK__Article__Creator__38996AB5">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArticleHashTag">
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <End Role="HashTag" Type="Self.HashTag" Multiplicity="*" />
+  </Association>
+  <Association Name="ArticleUserFavorite">
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <Association Name="ArticleUserLike">
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <Association Name="ArticleUserView">
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <Association Name="UserHashTag">
+    <End Role="HashTag" Type="Self.HashTag" Multiplicity="*" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="BlogContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="HashTags" EntityType="Self.HashTag" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Article__Creator__38996AB5" Association="Self.FK__Article__Creator__38996AB5">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleHashTag" Association="Self.ArticleHashTag">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="HashTag" EntitySet="HashTags" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleUserFavorite" Association="Self.ArticleUserFavorite">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleUserLike" Association="Self.ArticleUserLike">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleUserView" Association="Self.ArticleUserView">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="UserHashTag" Association="Self.UserHashTag">
+      <End Role="HashTag" EntitySet="HashTags" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

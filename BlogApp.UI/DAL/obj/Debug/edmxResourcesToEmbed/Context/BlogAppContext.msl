@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ContextContainer" CdmEntityContainer="BlogContext">
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="Context.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HashTags">
+      <EntityTypeMapping TypeName="Context.HashTag">
+        <MappingFragment StoreEntitySet="HashTag">
+          <ScalarProperty Name="HashTagId" ColumnName="HashTagId" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Context.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ArticleHashTag" TypeName="Context.ArticleHashTag" StoreEntitySet="ArticleHashTag">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="ArticleId" ColumnName="Article" />
+      </EndProperty>
+      <EndProperty Name="HashTag">
+        <ScalarProperty Name="HashTagId" ColumnName="HashTag" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleUserFavorite" TypeName="Context.ArticleUserFavorite" StoreEntitySet="ArticleUserFavorite">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="ArticleId" ColumnName="Article" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleUserLike" TypeName="Context.ArticleUserLike" StoreEntitySet="ArticleUserLike">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="ArticleId" ColumnName="Article" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleUserView" TypeName="Context.ArticleUserView" StoreEntitySet="ArticleUserView">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="ArticleId" ColumnName="Article" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserHashTag" TypeName="Context.UserHashTag" StoreEntitySet="UserHashTag">
+      <EndProperty Name="HashTag">
+        <ScalarProperty Name="HashTagId" ColumnName="HashTag" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BLL.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BLL.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="UserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDTO" nillable="true" type="tns:UserDTO" />
+  <xs:complexType name="ArrayOfArticleDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArticleDTO" nillable="true" type="tns:ArticleDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArticleDTO" nillable="true" type="tns:ArrayOfArticleDTO" />
+  <xs:complexType name="ArticleDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArticleId" type="xs:int" />
+      <xs:element minOccurs="0" name="CountLikes" type="xs:int" />
+      <xs:element minOccurs="0" name="CountUsersWhoAddedToFavorite" type="xs:int" />
+      <xs:element minOccurs="0" name="CountViews" type="xs:int" />
+      <xs:element minOccurs="0" name="Creator" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArticleDTO" nillable="true" type="tns:ArticleDTO" />
+  <xs:complexType name="HashTagDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HashTagId" type="xs:int" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HashTagDTO" nillable="true" type="tns:HashTagDTO" />
+  <xs:complexType name="ArrayOfHashTagDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HashTagDTO" nillable="true" type="tns:HashTagDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHashTagDTO" nillable="true" type="tns:ArrayOfHashTagDTO" />
+</xs:schema>

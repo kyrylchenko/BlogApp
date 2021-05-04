@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Context" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ArticleId" />
+    </Key>
+    <Property Name="ArticleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Creator" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleHashTag">
+    <Key>
+      <PropertyRef Name="Article" />
+      <PropertyRef Name="HashTag" />
+    </Key>
+    <Property Name="Article" Type="int" Nullable="false" />
+    <Property Name="HashTag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleUserFavorite">
+    <Key>
+      <PropertyRef Name="Article" />
+      <PropertyRef Name="User" />
+    </Key>
+    <Property Name="Article" Type="int" Nullable="false" />
+    <Property Name="User" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleUserLike">
+    <Key>
+      <PropertyRef Name="Article" />
+      <PropertyRef Name="User" />
+    </Key>
+    <Property Name="Article" Type="int" Nullable="false" />
+    <Property Name="User" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleUserView">
+    <Key>
+      <PropertyRef Name="Article" />
+      <PropertyRef Name="User" />
+    </Key>
+    <Property Name="Article" Type="int" Nullable="false" />
+    <Property Name="User" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HashTag">
+    <Key>
+      <PropertyRef Name="HashTagId" />
+    </Key>
+    <Property Name="HashTagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserHashTag">
+    <Key>
+      <PropertyRef Name="User" />
+      <PropertyRef Name="HashTag" />
+    </Key>
+    <Property Name="User" Type="int" Nullable="false" />
+    <Property Name="HashTag" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Article__Creator__38996AB5">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleHa__Artic__440B1D61">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="ArticleHashTag" Type="Self.ArticleHashTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleHashTag">
+        <PropertyRef Name="Article" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleHa__HashT__44FF419A">
+    <End Role="HashTag" Type="Self.HashTag" Multiplicity="1" />
+    <End Role="ArticleHashTag" Type="Self.ArticleHashTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HashTag">
+        <PropertyRef Name="HashTagId" />
+      </Principal>
+      <Dependent Role="ArticleHashTag">
+        <PropertyRef Name="HashTag" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUs__Artic__47DBAE45">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="ArticleUserLike" Type="Self.ArticleUserLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleUserLike">
+        <PropertyRef Name="Article" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUs__Artic__4BAC3F29">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="ArticleUserView" Type="Self.ArticleUserView" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleUserView">
+        <PropertyRef Name="Article" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUs__Artic__4F7CD00D">
+    <End Role="Article" Type="Self.Article" Multiplicity="1" />
+    <End Role="ArticleUserFavorite" Type="Self.ArticleUserFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleUserFavorite">
+        <PropertyRef Name="Article" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUse__User__48CFD27E">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ArticleUserLike" Type="Self.ArticleUserLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleUserLike">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUse__User__4CA06362">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ArticleUserView" Type="Self.ArticleUserView" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleUserView">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArticleUse__User__5070F446">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ArticleUserFavorite" Type="Self.ArticleUserFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleUserFavorite">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserHashT__HashT__412EB0B6">
+    <End Role="HashTag" Type="Self.HashTag" Multiplicity="1" />
+    <End Role="UserHashTag" Type="Self.UserHashTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HashTag">
+        <PropertyRef Name="HashTagId" />
+      </Principal>
+      <Dependent Role="UserHashTag">
+        <PropertyRef Name="HashTag" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserHashTa__User__403A8C7D">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserHashTag" Type="Self.UserHashTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserHashTag">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ContextContainer">
+    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleHashTag" EntityType="Self.ArticleHashTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleUserFavorite" EntityType="Self.ArticleUserFavorite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleUserLike" EntityType="Self.ArticleUserLike" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleUserView" EntityType="Self.ArticleUserView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HashTag" EntityType="Self.HashTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserHashTag" EntityType="Self.UserHashTag" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Article__Creator__38996AB5" Association="Self.FK__Article__Creator__38996AB5">
+      <End Role="User" EntitySet="User" />
+      <End Role="Article" EntitySet="Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleHa__Artic__440B1D61" Association="Self.FK__ArticleHa__Artic__440B1D61">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="ArticleHashTag" EntitySet="ArticleHashTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleHa__HashT__44FF419A" Association="Self.FK__ArticleHa__HashT__44FF419A">
+      <End Role="HashTag" EntitySet="HashTag" />
+      <End Role="ArticleHashTag" EntitySet="ArticleHashTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUs__Artic__47DBAE45" Association="Self.FK__ArticleUs__Artic__47DBAE45">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="ArticleUserLike" EntitySet="ArticleUserLike" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUs__Artic__4BAC3F29" Association="Self.FK__ArticleUs__Artic__4BAC3F29">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="ArticleUserView" EntitySet="ArticleUserView" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUs__Artic__4F7CD00D" Association="Self.FK__ArticleUs__Artic__4F7CD00D">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="ArticleUserFavorite" EntitySet="ArticleUserFavorite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUse__User__48CFD27E" Association="Self.FK__ArticleUse__User__48CFD27E">
+      <End Role="User" EntitySet="User" />
+      <End Role="ArticleUserLike" EntitySet="ArticleUserLike" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUse__User__4CA06362" Association="Self.FK__ArticleUse__User__4CA06362">
+      <End Role="User" EntitySet="User" />
+      <End Role="ArticleUserView" EntitySet="ArticleUserView" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArticleUse__User__5070F446" Association="Self.FK__ArticleUse__User__5070F446">
+      <End Role="User" EntitySet="User" />
+      <End Role="ArticleUserFavorite" EntitySet="ArticleUserFavorite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserHashT__HashT__412EB0B6" Association="Self.FK__UserHashT__HashT__412EB0B6">
+      <End Role="HashTag" EntitySet="HashTag" />
+      <End Role="UserHashTag" EntitySet="UserHashTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserHashTa__User__403A8C7D" Association="Self.FK__UserHashTa__User__403A8C7D">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserHashTag" EntitySet="UserHashTag" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

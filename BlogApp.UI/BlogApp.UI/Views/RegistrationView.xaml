@@ -1,0 +1,89 @@
+﻿<Window x:Class="BlogApp.UI.Views.RegistrationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlogApp.UI.Views"
+        xmlns:inf="clr-namespace:BlogApp.UI.Infrastructure"
+        mc:Ignorable="d"
+        Title="RegistrationView" 
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+       
+        WindowState="Maximized"
+        Height="310" Width="350"
+  
+        ResizeMode="NoResize"
+        DataContext="{Binding Source={StaticResource locator}, Path=RegistrationVM}"
+      >
+    <Window.Resources>
+
+        <inf:PasswordToPasswordHashConverter x:Key="passwordToPasswordHashConverter"/>
+
+    </Window.Resources>
+    <Grid  Background="White">
+        <Grid.Resources>
+            <ResourceDictionary Source="MaterialDesign.xaml"></ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100">
+
+            </RowDefinition>
+            <RowDefinition>
+
+            </RowDefinition>
+            <RowDefinition Height="80">
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <materialDesign:PackIcon Kind="AccountCircle" Width="100" Height="100"></materialDesign:PackIcon>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" >
+
+            <TextBox Margin="30,0,30,0"
+                     x:Name="NameTextBox"
+                     materialDesign:HintAssist.Hint="Name"
+                     materialDesign:HintAssist.IsFloating="True"
+                     Text="{Binding User.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox  Margin="30,0,30,0"
+                      x:Name="EmailTextBox"
+                      Text="{Binding User.Login}"
+                      materialDesign:HintAssist.Hint="Email"
+                      materialDesign:HintAssist.IsFloating="True"  />
+            <TextBox Margin="30,0,30,0" x:Name="PasswordBox"
+                         materialDesign:HintAssist.Hint="Password"
+                        Text="{Binding User.Password,Converter={StaticResource passwordToPasswordHashConverter}}"
+              
+                         materialDesign:HintAssist.IsFloating="True" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal"  >
+            <Button
+                  Command="{Binding RegistrateCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"
+                    x:Name="RegisterButton"
+                    Margin="70,0,0,0"
+                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    
+                     Content="REGISTER"  />
+
+            <Button
+                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"
+                    x:Name="CancleButton"
+               Command="{Binding CancleCommand}"
+                    Margin="30,0,0,0"
+                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                   IsCancel="True"
+                     Content="CANCLE"  />
+
+        </StackPanel>
+
+    </Grid>
+</Window>

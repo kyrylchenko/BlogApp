@@ -1,0 +1,88 @@
+﻿<Window x:Class="BlogApp.UI.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlogApp.UI.Views"
+        xmlns:inf="clr-namespace:BlogApp.UI.Infrastructure"
+        mc:Ignorable="d"
+        Title="LoginView" 
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+   
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+       
+           ResizeMode="NoResize"
+        DataContext="{Binding Source={StaticResource locator}, Path=LoginVM}" Width="414" Height="180"
+      >
+    <Window.Resources>
+        
+        <inf:PasswordToPasswordHashConverter x:Key="passwordToPasswordHashConverter"/>
+        
+    </Window.Resources>
+    <Grid >
+        <Grid.Resources>
+            <ResourceDictionary Source="MaterialDesign.xaml"></ResourceDictionary>
+        </Grid.Resources>
+        <StackPanel>
+            <TextBox
+               
+                  Margin="80,10,80,0"
+                Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                       Style="{StaticResource MaterialDesignFilledTextBox}"
+                       VerticalAlignment="Top"
+                       AcceptsReturn="True"
+                       TextWrapping="Wrap"
+                       MaxWidth="400"
+                       materialDesign:HintAssist.Hint="Login (Your Email)"
+                         
+                />
+            <TextBox
+            Text="{Binding PasswordHash,Converter={StaticResource passwordToPasswordHashConverter}}"
+               Style="{StaticResource MaterialDesignFilledTextBox}"
+                 Margin="80,10,80,0"
+                   VerticalAlignment="Top"          
+                        materialDesign:HintAssist.Hint="Password"
+          
+                />
+            <StackPanel Margin="40,15,40,0" Orientation="Horizontal">
+                <Button
+                    x:Name="RegisterButton"
+                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                    Command="{Binding RegistrateCommand}"
+                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                     Content="REGISTER" 
+                    />
+                <Button
+                    x:Name="LoginButton"
+                    Margin="40,0,0,0"
+                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Command="{Binding LoginCommand}"
+                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                     Content="LOGIN" 
+                    />
+                <Button
+                    x:Name="CancleButton"
+                    Margin="30,0,0,0"
+                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                    Command="{Binding CancleCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                     Content="CANCLE" 
+                   />
+            </StackPanel>
+            <ProgressBar
+                x:Name="WorkIndicator"
+                IsEnabled="False"
+                Margin="5"
+  IsIndeterminate="True" />
+        </StackPanel>
+    </Grid>
+</Window>

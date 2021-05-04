@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BlogService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IBlogService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BLL.DTO" />
+      <xsd:import schemaLocation="http://localhost:8733/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBlogService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileRequest">
+    <wsdl:part name="parameters" element="tns:UploadFileRequest" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileRequest_Headers">
+    <wsdl:part name="filePath" element="tns:filePath" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_UploadFile_OutputMessage" />
+  <wsdl:message name="IBlogService_DownloadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_DownloadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesByUserHashTages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesByUserHashTages" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesByUserHashTages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesByUserHashTagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetHashTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHashTag" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetHashTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHashTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesByHashTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesByHashTag" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesByHashTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesByHashTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetLikedArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikedArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetLikedArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLikedArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetLikedArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetLikedArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetLikedArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetLikedArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetMyArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetMyArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetMyArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMyArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetMyArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMyArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetViewedArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetViewedArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetViewedArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetViewedArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetViewedArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetViewedArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetViewedArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetViewedArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetFavoriteArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFavoriteArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetFavoriteArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFavoriteArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetFavoriteArticles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetFavoriteArticles" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetFavoriteArticles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetFavoriteArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetUserHashTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserHashTags" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetUserHashTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserHashTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetUserHashTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserHashTags" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetUserHashTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserHashTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesHashTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesHashTags" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlesHashTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlesHashTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetArticleHashTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetArticleHashTags" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_SetArticleHashTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetArticleHashTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_Test_InputMessage">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_Test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBlogService">
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/RegisterUser" message="tns:IBlogService_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/RegisterUserResponse" message="tns:IBlogService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/UploadFile" name="UploadFileRequest" message="tns:UploadFileRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/UploadFileResponse" message="tns:IBlogService_UploadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/DownloadFile" message="tns:IBlogService_DownloadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/DownloadFileResponse" message="tns:IBlogService_DownloadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/Connect" message="tns:IBlogService_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/ConnectResponse" message="tns:IBlogService_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/Disconnect" message="tns:IBlogService_Disconnect_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesByUserHashTages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetArticlesByUserHashTages" message="tns:IBlogService_GetArticlesByUserHashTages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetArticlesByUserHashTagesResponse" message="tns:IBlogService_GetArticlesByUserHashTages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHashTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetHashTag" message="tns:IBlogService_GetHashTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetHashTagResponse" message="tns:IBlogService_GetHashTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesByHashTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetArticlesByHashTag" message="tns:IBlogService_GetArticlesByHashTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetArticlesByHashTagResponse" message="tns:IBlogService_GetArticlesByHashTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLikedArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetLikedArticles" message="tns:IBlogService_GetLikedArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetLikedArticlesResponse" message="tns:IBlogService_GetLikedArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLikedArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetLikedArticles" message="tns:IBlogService_SetLikedArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetLikedArticlesResponse" message="tns:IBlogService_SetLikedArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetMyArticles" message="tns:IBlogService_GetMyArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetMyArticlesResponse" message="tns:IBlogService_GetMyArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMyArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetMyArticles" message="tns:IBlogService_SetMyArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetMyArticlesResponse" message="tns:IBlogService_SetMyArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViewedArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetViewedArticles" message="tns:IBlogService_GetViewedArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetViewedArticlesResponse" message="tns:IBlogService_GetViewedArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetViewedArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetViewedArticles" message="tns:IBlogService_SetViewedArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetViewedArticlesResponse" message="tns:IBlogService_SetViewedArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFavoriteArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetFavoriteArticles" message="tns:IBlogService_GetFavoriteArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetFavoriteArticlesResponse" message="tns:IBlogService_GetFavoriteArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFavoriteArticles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetFavoriteArticles" message="tns:IBlogService_SetFavoriteArticles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetFavoriteArticlesResponse" message="tns:IBlogService_SetFavoriteArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserHashTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetUserHashTags" message="tns:IBlogService_GetUserHashTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetUserHashTagsResponse" message="tns:IBlogService_GetUserHashTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserHashTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetUserHashTags" message="tns:IBlogService_SetUserHashTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetUserHashTagsResponse" message="tns:IBlogService_SetUserHashTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesHashTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetArticlesHashTags" message="tns:IBlogService_GetArticlesHashTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetArticlesHashTagsResponse" message="tns:IBlogService_GetArticlesHashTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetArticleHashTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/SetArticleHashTags" message="tns:IBlogService_SetArticleHashTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/SetArticleHashTagsResponse" message="tns:IBlogService_SetArticleHashTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/Test" message="tns:IBlogService_Test_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/TestResponse" message="tns:IBlogService_Test_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IBlogService" type="tns:IBlogService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IBlogService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RegisterUser">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/UploadFile" style="document" />
+      <wsdl:input name="UploadFileRequest">
+        <soap12:header message="tns:UploadFileRequest_Headers" part="filePath" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Connect">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/Connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/Disconnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesByUserHashTages">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetArticlesByUserHashTages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHashTag">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetHashTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesByHashTag">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetArticlesByHashTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLikedArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetLikedArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLikedArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetLikedArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetMyArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMyArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetMyArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViewedArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetViewedArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetViewedArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetViewedArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFavoriteArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetFavoriteArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFavoriteArticles">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetFavoriteArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserHashTags">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetUserHashTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserHashTags">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetUserHashTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlesHashTags">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/GetArticlesHashTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetArticleHashTags">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/SetArticleHashTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap12:operation soapAction="http://tempuri.org/IBlogService/Test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BlogService">
+    <wsdl:port name="NetTcpBinding_IBlogService" binding="tns:NetTcpBinding_IBlogService">
+      <soap12:address location="net.tcp://localhost:8734/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8734/</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

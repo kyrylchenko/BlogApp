@@ -1,0 +1,144 @@
+﻿<Window x:Class="BlogApp.UI.Views.CreateArticleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlogApp.UI.Views"
+        mc:Ignorable="d"
+        Title="CreateArticleView" 
+         AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"       
+        FontFamily="{DynamicResource MaterialDesignFont}" 
+  
+      Height="500" Width="375"
+     
+        ResizeMode="NoResize"
+        DataContext="{Binding Source={StaticResource locator}, Path=CreateArticleVM}"
+    >
+    <Window.Resources>
+        <ResourceDictionary Source="MaterialDesign.xaml"></ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.Resources>
+            <ResourceDictionary Source="MaterialDesign.xaml"></ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+     
+        <materialDesign:PackIcon HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                                 Kind="Newspaper"
+                                 Width="70"
+                                 Height="70"
+                  ></materialDesign:PackIcon>
+        <TextBox Margin="30,0,30,0"
+                 Grid.Row="1"
+                 VerticalAlignment="Center"
+               Text="{Binding CreatedArticle.Title}"
+              
+                 materialDesign:HintAssist.Hint="Title"
+                 materialDesign:HintAssist.IsFloating="True"/>
+
+        <ScrollViewer Grid.Row="2">
+            <ListBox 
+                
+            ItemsSource="{Binding HashTags}"
+            HorizontalAlignment="Center"
+            SelectionMode="Single"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedItem="{Binding Hashtag}"
+                 Margin="5"
+                 Style="{StaticResource MaterialDesignFilterChipListBox}">
+             
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding  Tag}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+              
+            </ListBox>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <materialDesign:PackIcon  Width="34" Height="34" Kind="Pound" Margin="0,10" />
+            <TextBox 
+                 Margin="8"
+                 VerticalAlignment="Center"
+                 MinWidth="260"
+                 materialDesign:HintAssist.Hint="Hashtag"
+                 materialDesign:HintAssist.IsFloating="True"
+                Text="{Binding Hashtag.Tag}"/>
+
+            <Button Command="{Binding  AddHashTagCommand}" HorizontalAlignment="Right">
+                <materialDesign:PackIcon 
+                    Kind="Add"
+                   Height="25"
+                    Width="30"
+                    ></materialDesign:PackIcon>
+            </Button>
+
+
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="File" Width="34" Height="34" Margin="0, 10"></materialDesign:PackIcon>
+
+            <TextBox 
+                 Margin="8"
+                 VerticalAlignment="Center"
+                 MinWidth="260"
+                 materialDesign:HintAssist.Hint="File Path"
+                 materialDesign:HintAssist.IsFloating="True" Width="328" Text="{Binding FilePath}"/>
+        </StackPanel>
+        <Button
+            Grid.Row="5"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+                    HorizontalAlignment="Right"
+            Margin="0, 0, 10, 0"
+                     Content="OPEN"
+            Command="{Binding BrowserCommand}"></Button>
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
+
+            <Button Margin="70, 0, 0, 0"
+
+       
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                    HorizontalAlignment="Right"
+                     Content="SAVE"
+                    Command="{Binding CreateCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"></Button>
+            <Button Margin="50, 0, 0, 0"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CancleCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"
+                    Content="CANCLE" IsCancel="True"  >
+            </Button>
+        </StackPanel>
+        <ProgressBar Grid.Row="7"
+                
+                IsEnabled="False"
+                Margin="5"
+  IsIndeterminate="True" />
+    </Grid>
+</Window>
